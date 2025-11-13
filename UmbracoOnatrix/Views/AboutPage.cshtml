@@ -1,0 +1,30 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.AboutPage>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+@if (Model.HasValue("aboutHeaderBlock"))
+{
+    var aboutBlocks = Model.Value<Umbraco.Cms.Core.Models.Blocks.BlockListModel>("aboutHeaderBlock");
+    @await Html.GetBlockListHtmlAsync(aboutBlocks)
+}
+
+@if (Model.HasValue("aboutInfoBlock"))
+{
+    var aboutBlocks = Model.Value<Umbraco.Cms.Core.Models.Blocks.BlockListModel>("aboutInfoBlock");
+    @await Html.GetBlockListHtmlAsync(aboutBlocks)
+}
+
+@if (Model.HasValue("aboutReviewBlock"))
+{
+    var aboutBlocks = Model.Value<Umbraco.Cms.Core.Models.Blocks.BlockListModel>("aboutReviewBlock");
+    @await Html.GetBlockListHtmlAsync(aboutBlocks)
+}
+@if (Model.HasValue("aboutTeamBlock"))
+{
+    var teamBlocks = Model.Value<Umbraco.Cms.Core.Models.Blocks.BlockListModel>("aboutTeamBlock");
+    @await Html.GetBlockListHtmlAsync(teamBlocks)
+}

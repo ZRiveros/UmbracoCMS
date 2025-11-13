@@ -1,0 +1,1751 @@
+﻿/* =========================================================
+   Core variables
+   ========================================================= */
+:root {
+    --color-main: #4F5955;
+    --color-sub1: #F2EDDC;
+    --color-sub3: #D9C3A9;
+    --color-note1: #9C9EA6;
+    --color-body: #535656;
+    --gutter: 24px;
+    --radius: .375rem;
+}
+
+/* =========================================================
+   Reset / base
+   ========================================================= */
+* {
+    box-sizing: border-box;
+}
+
+/* === Page structure === */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+}
+
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Containers */
+/*.container {
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}*/
+
+/* =========================================================
+   Typography
+   ========================================================= */
+body main h1,
+body main h2,
+body main h3,
+body main h4,
+body main h5,
+body main h6,
+body main p {
+    color: var(--color-main);
+    font-size: 20px;
+    margin: 0 0 .5rem;
+}
+
+.lead {
+    font-size: 18px;
+    color: var(--color-note1);
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* =========================================================
+   Buttons
+   ========================================================= */
+.btn {
+    display: inline-block;
+    padding: .75rem 1.25rem;
+    border-radius: var(--radius);
+    border: 0;
+    text-decoration: none;
+    font-weight: 600;
+    background: var(--color-main);
+    color: #fff;
+}
+
+.btn--ghost {
+    background: transparent;
+    border: 2px solid var(--color-main);
+    color: var(--color-main);
+}
+
+.btn-primary {
+    background: var(--color-main);
+    color: #fff;
+}
+.btn btn-primary hero__btn {
+    color: #F2EDDC;
+}
+
+/* =========================================================
+   Grid helpers
+   ========================================================= */
+.grid {
+    display: grid;
+    gap: 24px;
+}
+
+.grid--2 {
+    grid-template-columns: repeat(2, minmax(0,1fr));
+}
+
+.grid--3 {
+    grid-template-columns: repeat(3, minmax(0,1fr));
+}
+
+/* Sections */
+.section {
+    padding: 40px 0 32px 0;
+}
+
+.section--light {
+    background: #f8f8f8;
+}
+
+.section__head {
+    margin-bottom: 24px;
+}
+
+/* Wrapper för huvudinnehållet */
+/* Wrapper för hela sajten */
+.site-wrapper {
+    width: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    box-shadow: 0 0 20px rgba(0,0,0,0.05);
+}
+/* Se till att main tar all plats mellan header och footer */
+.main-content {
+    flex: 1;
+}
+
+/* =========================================================
+   Header / Nav
+   ========================================================= */
+header.container {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+}
+.site-header .topbar {
+    background: var(--color-main);
+    color: #fff;
+    font-size: 13px;
+    padding: 6px 0;
+}
+
+.topbar-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.topbar-address {
+    color: #fff;
+    opacity: 0.9;
+    margin-left: 300px;
+}
+
+.topbar-social {
+    display: flex;
+    gap: 14px;
+    margin-right: 300px;
+}
+
+    .topbar-social a {
+        color: #fff;
+        font-size: 14px;
+        transition: color 0.3s ease, transform 0.2s ease;
+    }
+
+        .topbar-social a:hover {
+            color: var(--color-sub3);
+            transform: translateY(-2px);
+        }
+
+
+/* Nav*/
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 0;
+    margin-left: 300px;
+}
+
+.brand {
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: none;
+}
+
+.nav__list {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    gap: 36px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav__link {
+    font-weight: 600;
+    text-decoration: none;
+    color: #4F5955;
+    transition: color 0.2s ease-in-out;
+    font-family: "Poppins", sans-serif;
+}
+
+    .nav__link:hover {
+        color: #C8B68C; 
+    }
+
+    .nav__link.active {
+        color: #C8B68C; 
+    }
+/* =========================================================
+   HERO block (layout + overlay form) 
+   ========================================================= */
+.hero {
+    position: relative;
+    width: 100%;
+    min-height: 550px;
+    background-size: cover;
+    background-position: 50% center; 
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+}
+
+
+.hero__inner {
+    margin: 0 auto;
+    min-height: 560px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    padding: 0 clamp(4vw, 8vw, 12vw);
+}
+
+.hero__text {
+    max-width: 560px;
+    text-align: left;
+    color: var(--color-main);
+    z-index: 2;
+    margin-left: 0;
+}
+
+    .hero__title {
+        font-size: 70px;
+        line-height: 1.2;
+        font-weight: 1000;
+        margin-bottom: 1rem;
+        font-style: inherit;
+        color: #4F5955;
+    }
+
+.hero__lead {
+    font-size: 16px;
+    color: var(--color-body);
+    margin-bottom: 1.5rem;
+}
+
+.hero__btn {
+    background: var(--color-main);
+    color: #F2EDDC;
+    padding: .8rem 1.5rem;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+/* =========================================================
+   We have 40 years experience styling
+   ========================================================= */
+
+/* === Experience + Form combined === */
+/* === Experience + Call To Action Section === */
+
+.experience-form-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+/* --- Left (Experience Text) --- */
+/* Vänster del (Experience text) */
+.experience-left {
+    flex: 1;
+    max-width: 550px;
+    align-self: center;
+    justify-content: center;
+}
+    .experience-left .note {
+        font-size: 13px;
+        text-transform: uppercase;
+        color: #c8b68c;
+        letter-spacing: 1px;
+    }
+
+    .experience-left h2 {
+        font-size: 40px;
+        color: #4f5955;
+        margin: 15px 0 20px;
+        font-weight: 700;
+        line-height: 1.2;
+    }
+
+    .experience-left blockquote {
+        font-style: italic;
+        color: #4f5955;
+        margin: 10px 0 20px;
+        font-size: 20px;
+    }
+
+    .experience-left p {
+        color: #555;
+        line-height: 1.7;
+        font-size: 14px;
+    }
+
+.experience_signature {
+    margin-top: 30px;
+}
+
+    .experience_signature img {
+        height: 60px;
+    }
+
+.experience_signature-name {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #333;
+}
+
+/* --- Right (Call to Action Form) --- */
+.experience-form-section {
+    position: relative;
+    z-index: 2;
+}
+
+.experience-right {
+    display: flex;
+    align-items: flex-start;
+    transform: translateY(-40px);
+}
+
+    .experience-right .callback-form {
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        padding: 40px;
+        max-width: 440px;
+        margin-right: 100px
+    }
+
+        .experience-right .callback-form h2 {
+            font-size: 30px;
+            color: #4f5955;
+            background-color: #4f5955;
+            color: #f2eddb;
+            padding: 18px 25px;
+            border-radius: 6px 6px 0 0;
+            margin: -40px -40px 20px -40px;
+            font-weight: 700;
+        }
+
+        .experience-right .callback-form p {
+            font-size: 15px;
+            color: #666;
+            margin-bottom: 20px;
+            font-style: Italic;
+        }
+
+        .experience-right .callback-form input,
+        .experience-right .callback-form select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 12px;
+            font-size: 15px;
+            font-style: Italic;
+        }
+
+        .experience-right .callback-form button {
+            background-color: #e8e1cd;
+            color: #4F5955;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+            .experience-right .callback-form button:hover {
+                background-color: #d6cfae;
+            }
+
+
+@media (max-width: 992px) {
+    .experience-form-wrapper {
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .experience-right {
+        justify-content: center;
+    }
+
+        .experience-right .callback-form {
+            max-width: 500px;
+        }
+}
+
+
+/* ========================
+   end of experience block 
+   ======================== */
+
+/* =========================================================
+   Call To Action Form Styling 
+   ========================================================= */
+
+/* ========================
+   end of call-back-form 
+   ======================== */
+
+/* =========================================================
+   SERVICES SECTION (grid med 3 kolumner)
+   ========================================================= */
+.services-section {
+    background-color: #F7F7F7;
+    padding: 2rem;
+}
+
+.section-pretitle {
+    text-transform: uppercase;
+    font-size: 14px;
+    color: var(--color-sub3);
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+    display: flex;
+    justify-content: center;
+}
+
+.section-title {
+    font-size: 40px;
+    font-weight: 800;
+    text-align: center;
+    color: var(--color-main);
+    margin: 0 auto 50px auto;
+    max-width: 600px; 
+    line-height: 1.3;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 24px; 
+    max-width: 1200px; 
+    margin: 0 auto;
+    padding: 0 40px; 
+    justify-items: center;
+}
+
+.service-item {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    transition: transform 0.2s ease;
+    width: 100%;
+    max-width: 370px;
+}
+
+    .service-item h3 {
+        font-size: 22px;
+        margin-bottom: 1rem;
+        text-align: center;
+        padding: 1rem;
+    }
+    .service-item p {
+        margin-top: 1rem;
+        font-size: 14px;
+        color: #535656;
+        padding: 0.5rem;
+        line-height: 1.6;
+        padding: 0 20px;
+        max-width: 300px;
+    }
+    .service-item:hover {
+        transform: translateY(-4px);
+    }
+
+.service-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--color-main);
+    margin-bottom: 1rem;
+}
+
+.service-img img {
+    width: 100%;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    border-radius: 0;
+}
+
+.service-desc {
+    font-size: 14px;
+    color: var(--color-body);
+    line-height: 1.6;
+}
+
+/* ========================
+ end of Services Section
+   ======================== */
+/* ========================
+   Trusted Clients Section
+   ======================== */
+
+.trusted-section {
+    text-align: center;
+    padding: 100px 0 0 0;
+    position: relative;
+    overflow: hidden;
+    margin-top: 50px;
+    background-color: #ffffff;
+    background-repeat: no-repeat;
+    background-image: url("/media/aslhtujc/dot-map-1.png");
+    background-position: center 20%;
+    background-size: 60%;
+}
+
+    .trusted-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-size: contain;
+        opacity: 0.25;
+        z-index: 0;
+    }
+
+.trusted-container {
+    width: 100%;
+    max-width: 800px;
+    margin-left: auto; 
+    margin-right: auto; 
+    position: relative;
+    z-index: 1;
+}
+
+.trusted-title {
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--color-main);
+    margin-bottom: 10px;
+}
+
+    .trusted-title span {
+        display: block;
+        color: #d8b48a;
+        font-weight: 700;
+        margin-top: 5px;
+    }
+
+.trusted-container p {
+    max-width: 700px;
+    margin: 20px 20px;
+    line-height: 1.7;
+    opacity: 0.9;
+    font-style: italic;
+    color: var(--color-body);
+    text-align: center;
+}
+
+
+.trusted-desc {
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.7;
+    opacity: 0.9;
+    font-style: italic;
+    color: var(--color-body);
+    font-size: 16px;
+    padding: 1rem 1rem;
+    margin-bottom: 30px;
+}
+
+.trusted-section .btn-primary {
+    background: var(--color-main);
+    color: #fff;
+    padding: 0.8rem 1.8rem;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: background 0.3s ease;
+}
+
+    .trusted-section .btn-primary:hover {
+        background: #3f4b48;
+    }
+
+/* Bild längst ner av trusted */
+.trusted-image {
+    margin-top: 3rem;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+    .trusted-image img {
+        height: auto;
+        display: block;
+    }
+    /*Trusted Image*/
+
+/* === Success Story Section (justerad version) === */
+/*.umb-block-list {
+    margin-top:3rem;
+}
+*/
+.success-section {
+    background-color: #4a5550;
+    background-image: url("/media/khcfogn4/dot-mapgreen.png");
+    background-repeat: no-repeat;
+    background-position: center 20%;
+    background-size: 60%;
+    text-align: center;
+    color: #fff;
+    padding: 120px 0 220px;
+    position: relative;
+    overflow: visible;
+}
+
+    .success-section .container {
+        margin: 0 auto;
+        position: relative;
+        z-index: 2;
+    }
+
+.success-pretitle {
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #d8b48a;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    z-index: 2;
+}
+
+.success-title {
+    font-size: 40px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 40px;
+}
+
+.success-stats {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    margin-bottom: 250px;
+    flex-wrap: wrap;
+}
+
+.stat-item h3 {
+    font-size: 64px;
+    color: #d8b48a; 
+    margin-bottom: 10px;
+}
+
+.stat-item p {
+    font-size: 14px;
+    color: #fff;
+    max-width: 200px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* === Bilden – flyttad upp lite === */
+.success-image {
+    position: absolute;
+    left: 50%;
+    bottom: -90px; 
+    transform: translateX(-50%);
+    z-index: 4;
+}
+
+    .success-image img {
+        display: block;
+        width: 940px;
+        max-width: 100%;
+        border-radius: 10px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+    }
+
+
+/* === Sektion för logotyperna under === */
+.partners-section {
+    background-color: #fff;
+    padding: 160px 0 80px;
+    text-align: center;
+}
+
+.partners-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 60px;
+    opacity: 0.8;
+}
+
+    .partners-logos img {
+        max-height: 40px;
+        filter: grayscale(100%);
+        transition: filter 0.3s ease, opacity 0.3s ease;
+    }
+
+        .partners-logos img:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+
+/*Slut på homepage!*/
+
+/* === ABOUT PAGE === */
+.about-intro {
+    padding: 100px 0;
+    background: #fff;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 60px;
+}
+
+.about-image img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+
+.about-text h2 {
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--color-main);
+    margin-bottom: 20px;
+}
+
+.about-text p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--color-body);
+}
+
+.page-header {
+    background-color: #f9f9f9;
+    position: relative;
+    overflow: hidden;
+    min-height: 280px;
+}
+
+.bg-shape {
+    opacity: 0.15;
+    pointer-events: none;
+    user-select: none;
+}
+
+.bg-left {
+    left: 0;
+    top: 0;
+}
+
+.bg-right {
+    right: 0;
+    top: 0;
+}
+
+.page-header h1 {
+    font-size: 40px;
+    color: #4F5955;
+    margin-bottom: 0.5rem;
+}
+
+.page-header .breadcrumb {
+    color: #8c8c8c;
+    font-size: 0.95rem;
+}
+
+    .page-header .breadcrumb a {
+        color: #4F5955;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .page-header .breadcrumb span {
+        color: #d8cfc0;
+        margin: 0 0.3rem;
+    }
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+.breadcrumb {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+    .breadcrumb a {
+        color: #6c757d;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+        .breadcrumb a:hover {
+            color: #b59778; 
+        }
+
+    /* Aktiva (sista) länk */
+    .breadcrumb span:last-child {
+        color: #D9C3A9;
+        font-weight: 600;
+    }
+
+/* === ABOUT PROFILE BLOCK === */
+.about-profile {
+    padding: 100px 0;
+    background: #fff;
+}
+
+.about-profile__inner {
+    display: grid;
+    grid-template-columns: 1fr 2.1fr;
+    align-items: center;
+    gap: 3rem; 
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.about-profile__image img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    margin-bottom: 0.5rem;
+}
+
+.about-profile__person {
+    font-style: italic;
+    color: #4F5955;
+    font-size: 14px;
+}
+
+.about-profile__text h2 {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400; 
+    font-style: italic;
+    font-size: 24px;
+    color: #4f5955;
+    margin-bottom: 20px;
+    max-width: 720px;
+}
+
+.about-profile__text p {
+    white-space: pre-line;
+    line-height: 1.5;
+    margin-bottom: 1.2rem;
+    color: #4f5955;
+    font-size: 14px;
+    font-style: italic;
+    max-width: 720px;
+}
+
+
+/* ===== Trusted/Review (Kevin Gardiner) ===== */
+.about-review__inner {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 80px;
+    align-items: center;
+    min-height: 500px;
+    background-color: #f8f8f8;
+}
+
+.about-review__text {
+    max-width: 520px;
+    width: 100%;
+    margin-left: auto;
+/*    margin-right: auto;*/
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.about-review__subtitle {
+    font-size: 40px;
+    font-weight: 800;
+    color: var(--color-main);
+    margin-bottom: 18px;
+    max-width: 350px;
+    line-height: 1.0;
+}
+
+.about-review__title {
+    font-size: 13px;
+    color: #C8B68C;
+    font-weight: 700;
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.about-review__quote {
+    font-size: 20px !important;
+    line-height: 1.6 !important;
+    color: rgba(0, 0, 0, 0.6) !important;
+    font-style: italic !important;
+    opacity: 0.7 !important;
+}
+
+.about-review__stars {
+    margin: 18px 0 10px 0;
+    font-size: 18px;
+    color: #333333;
+    letter-spacing: 2px;
+    display: flex;
+    gap: 6px;
+}
+
+.about-review__author {
+    color: #4F5955;
+    font-size: 15px;
+    margin-bottom: 2px;
+}
+
+.about-review__company {
+    color: #6b6f6e;
+    font-size: 17px;
+    font-style: italic;
+}
+
+.about-review__image {
+    height: 100%;
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-end;
+}
+
+    .about-review__image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        box-shadow: 0 6px 20px rgba(0,0,0,.10);
+        display: block;
+    }
+/* ==== Team Section ==== */
+/* =========================================================
+   Team Section (About Page)
+   ========================================================= */
+.team.section {
+    padding: 100px 0;
+    background-color: #fff;
+    text-align: center;
+}
+
+.team__subtitle {
+    color: var(--color-sub3);
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+}
+
+.team__title {
+    color: var(--color-main);
+    font-size: 40px;
+    font-weight: 800;
+    line-height: 1.3;
+    max-width: 450px;
+    margin: 0 auto 60px;
+}
+
+.team__grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+}
+
+.team .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.team__row-top {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 0;
+}
+
+    .team__row-top .team__card {
+        width: 370px;
+        height: 462px;
+        display: flex;
+        flex-direction: column;
+        border-radius: 16px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.10);
+        overflow: hidden;
+        background: #fff;
+        padding: 0;
+    }
+    .team__row-top .team__image {
+        flex: 1 1 auto;
+        display: flex;
+    }
+
+        .team__row-top .team__image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 16px 16px 0 0;
+            display: block;
+        }
+    .team__row-top .team__info {
+        padding: 1rem 0.5rem 0.5rem 0.5rem;
+        flex: 0 0 auto;
+        margin: 0;
+    }
+
+
+.team__row-bottom {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+
+}
+
+    .team__row-bottom .team__card {
+        width: 270px;
+        height: 356px;
+        display: flex;
+        flex-direction: column;
+        border-radius: 16px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.10);
+        overflow: hidden;
+        background: #fff;
+    }
+
+.team__card:nth-child(-n+3) {
+    grid-row: 1;
+    grid-column: span 1;
+    max-width: 400px;
+    justify-content:center;
+}
+
+.team__card:nth-child(-n+3) .team__image img {
+    object-fit: cover;
+    max-width:460px;
+}
+
+.team__card:nth-child(n+4) {
+    grid-row: 2;
+    max-width: 270px;
+}
+
+.team__card:nth-child(n+4) .team__image img {
+    height: 280px;
+    object-fit: cover;
+}
+
+.team__card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    overflow: hidden;
+    max-width: 270px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    margin: 0;
+}
+
+    .team__card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+.team__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 16px 16px 0 0;
+    display: block;
+}
+.team__info {
+    padding: 1rem 0.5rem;
+}
+
+    .team__info h4 {
+        color: var(--color-main);
+        font-size: 22px;
+        font-weight: 700;
+        margin-bottom: 0.25rem;
+        text-align: left;
+    }
+
+    .team__info p {
+        color: #9C9EA6;
+        font-size: 13px;
+        margin: 0;
+        text-align: left;
+    }
+
+/* ==============================
+   HEADER (fullbredd)
+============================== */
+.about-header-wrapper {
+    width: 100%;
+    background-color: #f9f9f9;
+    margin-bottom: 2rem;
+}
+
+/* ==============================
+   HUVUDLAYOUT
+============================== */
+.service-detail-layout {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 3rem;
+    align-items: start;
+    max-width: 1200px;
+    margin: 0 auto; 
+    padding: 0 2rem; 
+}
+.service-detail-content {
+    border-left: 1px solid #eee;
+    padding: 2rem;
+    max-width: 800px;
+}
+
+/* ==============================
+   SIDEBAR
+============================== */
+.service-detail-sidebar h4 {
+    margin-bottom: 1rem;
+    font-weight: 600;
+    color: #4F5955;
+    font-size: 22px;
+}
+.service-detail-sidebar{
+    max-width:300px;
+}
+.sidebar-image {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.sidebar-text {
+    color: #333;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.sidebar-help-box {
+    background-color: #4F5955;
+    padding: 1.2rem;
+    color: #4F5955;
+    border-radius: 6px;
+}
+
+    .sidebar-help-box h5 {
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        color: #F2EDDC;
+    }
+
+    .sidebar-help-box p {
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+        color: #ffffff;
+    }
+
+/* Formulär i sidebar */
+.help-form {
+    position: relative;
+}
+
+    .help-form input {
+        width: 100%;
+        padding: 0.6rem 2.2rem 0.6rem 0.8rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-style: italic;
+        font-size: 0.95rem;
+    }
+
+    .help-form i {
+        position: absolute;
+        right: 0.8rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #4F5955;
+        font-size: 1rem;
+    }
+
+    .help-form button {
+        display: none; 
+    }
+
+/* ==============================
+   CONTENT
+============================== */
+.service-detail-header-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 2rem;
+    object-fit: cover;
+}
+
+.service-detail-title {
+    font-weight: 700;
+    font-size: 22px;
+    margin-bottom: 1rem;
+    color: #4F5955;
+}
+
+.service-detail-description,
+.service-detail-description-two {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+}
+
+.service-detail-description-two {
+    margin-top: 2rem;
+    font-size: 14px;
+}
+
+/*Contact form details page*/
+
+/* =========================================================
+   CONTACT FORM SECTION (used in Risk Management details)
+   ========================================================= */
+.contact-form-section {
+    background-color: #fff;
+    padding: 80px 0;
+    display: flex;
+    justify-content: center
+}
+
+.contact-form-container {
+    width: 100%;
+    max-width: 1200px;
+    background: #fff;
+    border-radius: 8px;
+    padding: 50px 60px;
+    box-sizing: border-box;
+}
+
+    .contact-form-container h3 {
+        font-size: 26px;
+        font-weight: 700;
+        color: #4F5955;
+        margin-bottom: 30px;
+        text-align: left;
+    }
+
+/* === Form styling === */
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+}
+
+    .form-row input {
+        flex: 1;
+    }
+
+/* === Inputs & textarea === */
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 15px;
+    color: #4F5955;
+    background: #fafafa;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+        outline: none;
+        border-color: #C8B68C;
+        background: #fff;
+    }
+
+.contact-form textarea {
+    min-height: 140px;
+    resize: vertical;
+}
+
+/* === Submit button === */
+.contact-form button {
+    background-color: #4F5955;
+    color: #F2EDDC;
+    border: none;
+    padding: 12px 26px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 15px;
+    align-self: flex-start;
+    transition: background-color 0.3s ease;
+}
+
+    .contact-form button:hover {
+        background-color: #3d4744;
+    }
+
+/* === Responsiv layout === */
+@media (max-width: 768px) {
+    .form-row {
+        flex-direction: column;
+    }
+
+    .contact-form-container {
+        padding: 40px 30px;
+    }
+}
+
+
+/* ================================
+   CONTACT PERSON BLOCK (mannen)
+==================================*/
+
+.contact-person-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* Bildbehållaren */
+.contact-person-image {
+    position: relative;
+    width: 360px;
+}
+
+/* --- Bakgrundsformen --- */
+.contact-bg-shape {
+    position: absolute;
+    bottom: 0;
+    left: 1rem;
+    z-index: 1;
+    height: 450px;
+}
+
+/* --- Själva personen --- */
+.person-photo {
+    position: relative;
+    width: 100%;
+    height: auto;
+    z-index: 2;
+}
+
+/* --- Texten --- */
+.contact-person-info {
+    max-width: 480px;
+    z-index: 2;
+    position: relative;
+}
+/* --- Kontaktuppgifter --- */
+.contact-detail {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 18px;
+}
+.contact-person-info h2 {
+    font-size: 40px;
+    color: var(--color-main);
+    margin-bottom: 20px;
+    line-height: 1.3;
+    font-weight: 800;
+    width: 450px;
+}
+
+    .contact-person-info p {
+        font-size: 16px;
+        color: var(--color-body);
+        margin-bottom: 18px;
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        line-height: 1.6;
+    }
+
+    .contact-person-info i {
+        color: #C8B68C;
+        font-size: 18px;
+        min-width: 22px;
+        margin-top: 3px;
+    }
+
+/* Etiketten över texten ("Office location" etc.) */
+.contact-label {
+    display: block;
+    font-weight: 600;
+    color: #4F5955;
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+/* --- Responsiv --- */
+@media (max-width: 992px) {
+    .contact-person-wrapper {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+    }
+
+    .contact-person-image {
+        width: 260px;
+    }
+
+    .contact-bg-shape {
+        display: none;
+    }
+}
+
+
+/* ================================
+   CONTACT FORM MAP SECTION
+==================================*/
+.contact-form-map {
+    position: relative;
+    width: 100%;
+    margin-top: -100px;
+    z-index: 2;
+}
+
+.contact-map {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5rem;
+}
+
+    .contact-map img {
+        max-width: 1920px;
+        height: auto;
+        object-fit: cover;
+    }
+
+/* Formuläret ovanpå kartan */
+.contact-form-card {
+    position: absolute;
+    top: 75%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 60px 70px;
+    border-radius: 10px;
+    box-shadow: 0 8px 35px rgba(0, 0, 0, 0.08);
+    max-width: 960px;
+    width: 100%;
+    text-align: center;
+}
+
+    .contact-form-card .form-eyebrow {
+        color: #C8B68C;
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 12px;
+        font-weight:700;
+    }
+
+    /* Rubrik och undertitel */
+    .contact-form-card h2 {
+        font-size: 38px;
+        color: #4F5955;
+        font-weight: 700;
+        margin-bottom: 14px;
+        line-height: 1.2;
+    }
+
+    .contact-form-card .form-desc {
+        font-size: 15px;
+        color: #777;
+        margin-bottom: 30px;
+        font-style: italic;
+        line-height: 1.6;
+    }
+
+    /* Inputfält */
+    /* Fältlayout */
+    .contact-form-card form {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    .contact-form-card .row {
+        display: flex;
+        gap: 15px;
+    }
+
+    .contact-form-card input,
+    .contact-form-card select {
+        width: 100%;
+        padding: 12px 14px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 14px;
+    }
+
+    .contact-form-card select {
+        cursor: pointer;
+        background: #fff;
+    }
+
+    /* Submit-knapp */
+    .contact-form-card .btn-submit {
+        background-color: #4F5955;
+        color: #F2EDDC;
+        border: none;
+        padding: 10px 18px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        font-weight: 600;
+        margin-top: 12px;
+        font-size: 14px;
+        width: 110px;
+        align-self: center;
+    }
+
+        .contact-form-card .btn-submit:hover {
+            background-color: #3b4743;
+        }
+
+/* ================================
+   PARTNER LOGOS
+==================================*/
+.partners-section {
+    background: #fff;
+    padding: 160px 0 80px;
+    text-align: center;
+}
+
+.partners-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 60px;
+    opacity: 0.8;
+}
+
+    .partners-logos img {
+        max-height: 40px;
+        filter: grayscale(100%);
+        transition: filter 0.3s ease, opacity 0.3s ease;
+    }
+
+        .partners-logos img:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+
+
+/* =========================================================
+   Footer
+   ========================================================= */
+/* Svarta footern längst ner */
+.bottom-footer {
+    background-color: #0E0E0E;
+    padding: 1rem 0;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.bottom-footer-inner {
+    margin-left: 500px;
+}
+
+    .bottom-footer-inner p {
+        color: #535656;
+        font-size: 0.9rem;
+        margin: 0;
+    }
+
+/* === Footer section with background === */
+/* === GLOBAL FOOTER SECTION === */
+.footer-section {
+    background-color: #f8f8f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 100px;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* --- Bild och bakgrund bakom --- */
+.footer-image {
+    position: relative;
+    width: 400px;
+}
+
+.footer-bg-shape {
+    position: absolute;
+    bottom: 0;
+    left: 1rem;
+    z-index: 1;
+    height: 450px;
+}
+
+.footer-person {
+    position: relative;
+    width: 100%;
+    height: auto;
+    z-index: 2; 
+}
+
+/* --- Text till höger --- */
+.footer-content {
+    max-width: 480px;
+    z-index: 3;
+    position: relative;
+}
+
+    .footer-content h2 {
+        color: var(--color-main, #4F5955);
+        font-size: 36px;
+        margin-bottom: 30px;
+        line-height: 1.3;
+        font-weight: 700;
+    }
+
+    /* Kontaktinfo */
+    .footer-content ul {
+        list-style: none;
+        padding: 0;
+        font-size: 15px;
+        color: var(--color-body, #4F5955);
+        line-height: 1.8;
+        margin: 0;
+    }
+
+        .footer-content ul li {
+            margin-bottom: 18px;
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+        }
+
+    .footer-content i {
+        color: #C8B68C;
+        font-size: 18px;
+        min-width: 22px;
+        text-align: center;
+        margin-top: 3px;
+    }
+
+.footer-label {
+    font-weight: 600;
+    color: #4F5955;
+    display: block;
+    font-size: 15px;
+    margin-bottom: 2px;
+}
+
+.footer-content p {
+    margin: 0;
+    color: #4F5955;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+@media (max-width: 992px) {
+    .footer-inner {
+        flex-direction: column;
+        text-align: center;
+        gap: 50px;
+    }
+
+    .footer-image {
+        width: 280px;
+    }
+}

@@ -1,0 +1,37 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Umbraco.Cms.Core.Models.Blocks;
+
+@{
+    var content = (ContentModels.ServicesBlock)Model.Content;
+
+    var hasTitle = !string.IsNullOrWhiteSpace(content.SectionTitle);
+    var hasHeading = !string.IsNullOrWhiteSpace(content.MainHeading);
+
+    // Hämta blocklistan korrekt enligt din model
+    var items = content.ServicesItems;
+}
+
+<section class="services-section">
+    <div class="container">
+        @if (hasTitle)
+        {
+            <p class="section-pretitle">@content.SectionTitle</p>
+        }
+
+        @if (hasHeading)
+        {
+            <h2 class="section-title">@content.MainHeading</h2>
+        }
+
+        @if (items != null && items.Any())
+        {
+            <div class="services-grid">
+                @foreach (var item in items)
+                {
+                    @await Html.PartialAsync("Partials/blockList/Components/servicesItem", item)
+                }
+            </div>
+        }
+    </div>
+</section>

@@ -1,0 +1,25 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+
+@{
+    var content = (ContentModels.CallToActionFormBlock)Model.Content;
+}
+
+<section class="callback-form-section">
+    <div class="callback-form">
+        <h2>@content.FormTitle</h2>
+        <p>@content.FormDescription</p>
+
+        <form>
+            <input type="text" placeholder="@content.NameLabel" />
+            <input type="email" placeholder="@content.EmailLabel" />
+            <input type="tel" placeholder="@content.PhoneLabel" />
+
+            <select>
+                <option>@content.ServiceLabel</option>
+            </select>
+
+            <button type="submit" class="btn btn-primary">@content.ButtonText</button>
+        </form>
+    </div>
+</section>

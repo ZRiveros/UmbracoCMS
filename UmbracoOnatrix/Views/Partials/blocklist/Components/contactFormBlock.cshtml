@@ -1,0 +1,29 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+    var content = (ContentModels.ContactFormBlock)Model.Content;
+
+    var title = content.Value<string>("formTitle");
+    var namePlaceholder = content.Value<string>("namePlaceholder");
+    var emailPlaceholder = content.Value<string>("emailPlaceholder");
+    var messagePlaceholder = content.Value<string>("messagePlaceholder");
+    var buttonText = content.Value<string>("buttonText");
+}
+
+<section class="contact-form-section">
+    <div class="contact-form-container">
+        @if (!string.IsNullOrEmpty(title))
+        {
+            <h3>@title</h3>
+        }
+
+        <form class="contact-form">
+            <div class="form-row">
+                <input type="text" name="name" placeholder="@namePlaceholder" required />
+                <input type="email" name="email" placeholder="@emailPlaceholder" required />
+            </div>
+            <textarea name="message" placeholder="@messagePlaceholder" required></textarea>
+            <button type="submit">@buttonText</button>
+        </form>
+    </div>
+</section>

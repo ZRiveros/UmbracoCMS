@@ -1,0 +1,20 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+
+@{
+    var content = (ContentModels.ServicesItem)Model.Content;
+    var image = content.Image;
+    var link = content.Value<Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent>("serviceLink");
+}
+
+<div class="service-item">
+    <a href="@link?.Url()" class="service-link">
+        <h3 class="service-title">@content.Title</h3>
+        @if (image != null)
+        {
+            <img src="@image.Url()" alt="@content.Title" class="service-image" />
+        }
+
+        <p class="service-description">@content.Description</p>
+    </a>
+</div>

@@ -1,0 +1,93 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using Umbraco.Cms.Core.Models.Blocks
+@using Umbraco.Cms.Web.Common.PublishedModels
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels
+@{
+    var title = ViewData["Title"]?.ToString() ?? "Onatrix";
+    var home = Umbraco.ContentAtRoot().FirstOrDefault(x => x.ContentType.Alias == "homePage");
+    var navigationItems = home?.Children().Where(x => x.IsVisible())
+        ?? Enumerable.Empty<Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent>();
+    var logoMedia = home?.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("siteLogo");
+    var logoUrl = logoMedia?.Url();
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@title – Onatrix</title>
+    <script src="https://kit.fontawesome.com/3536abd8c9.js" crossorigin="anonymous"></script>
+    <link rel="icon" type="image/png" href="~/img/onatrixicon.png" />
+    <link rel="stylesheet" href="@(Url.Content("~/css/site.css"))" />
+</head>
+<body>
+    <div class="site-wrapper">
+        <div class="site-header">
+            <div class="topbar">
+                <div class="container topbar-inner">
+                    <span class="topbar-address">Klarabergsviadukten 90, 111 64 Stockholm</span>
+                    <div class="topbar-social">
+                        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <header class="container">
+                <nav class="nav">
+                    <a class="brand" href="@home?.Url()">
+                        <img src="@(logoUrl ?? Url.Content("~/img/onatrixicon.png"))" alt="Onatrix" style="height:40px;vertical-align:middle;" />
+                    </a>
+
+                    <ul class="nav__list">
+                        @foreach (var item in navigationItems)
+                        {
+                            <li>
+                                <a class="nav__link @(item.IsAncestorOrSelf(Model) ? "active" : "")" href="@item.Url()">
+                                    @item.Name
+                                </a>
+                            </li>
+
+                            @* Lägg in Projects efter Services som vi då inte designar *@
+                            @if (item.Name == "Services")
+                            {
+                                <li>
+                                    <a class="nav__link @(Context.Request.Path.ToString().Contains("/projects") ? "active" : "")" href="/projects">
+                                        Projects
+                                    </a>
+                                </li>
+                            }
+                        }
+                    </ul>
+                </nav>
+            </header>
+        </div>
+
+        <main class="main-content">
+            @RenderBody()
+        </main>
+
+        @if (Model is ContentModels.AboutPage
+                || Model is ContentModels.ServiceDetailPage)
+        {
+            @await Html.PartialAsync("~/Views/Shared/footer.cshtml")
+        }
+
+        @if (!(Model is ContentModels.ContactPage))
+        {
+            <footer class="site-footer">
+                @Html.GetBlockListHtml(Model.Value<BlockListModel>("globalFooterBlock"))
+            </footer>
+        }
+
+    </div>
+    <footer class="bottom-footer">
+        <div class="bottom-footer-inner">
+            <p>© Onatrix. All Rights Reserved. Credits to Themesflat</p>
+        </div>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Umbraco.Cms.Core.Models
+@{
+    var content = (ContentModels.AboutHeaderBlock)Model.Content;
+    var backgroundImage = content.BackgroundImage;
+
+
+    var bgLeft = backgroundImage?.Url() ?? "/img/misc/Rectangle.png";
+    var bgRight = backgroundImage?.Url() ?? "/img/misc/Rectangle1.png";
+
+}
+<section class="page-header" style="position: relative; overflow: hidden;">
+
+
+    <img src="@bgLeft" alt="Background Left"
+         class="bg-shape bg-left"
+         style="position:absolute; top:0; left:0; width:auto; height:100%; opacity:.2;" />
+
+
+    <img src="@bgRight" alt="Background Right"
+         class="bg-shape bg-right"
+         style="position:absolute; top:0; right:0; width:auto; height:100%; opacity:.2;" />
+
+    <div class="container" style="position: relative; z-index: 2; text-align:center; padding:6rem 0;">
+        <h1>@content.Title</h1>
+        <nav class="breadcrumb">
+            <a href="/">Home</a>
+            <span>›</span>
+            <a href="/services-page/">Services</a>
+            <span>›</span>
+            <span>@content.Title</span>
+        </nav>
+    </div>
+</section>

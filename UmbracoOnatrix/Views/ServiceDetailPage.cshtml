@@ -1,0 +1,150 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.ServiceDetailPage>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels
+@using Umbraco.Cms.Core.Models.Blocks
+@using Umbraco.Extensions
+@using System.IO
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    // HEADER CONTENT
+    var headerTitle = Model.Value<string>("serviceDetailHeaderTitle");
+    var headerImage = Model.Value<IPublishedContent>("serviceDetailHeaderImage");
+    var headerDescription = Model.Value<string>("serviceDetailHeaderDescription");
+    var headerTitleTwo = Model.Value<string>("serviceDetailHeaderTitleTwo");
+    var headerDescriptionTwo = Model.Value<string>("serviceDetailHeaderDescriptionTwo");
+    var contentBlocks = Model.Value<BlockListModel>("serviceDetailContentBlocks");
+
+    // SIDEBAR
+    var sidebarTitle = Model.Value<string>("sidebarAboutTitle");
+    var sidebarImage = Model.Value<IPublishedContent>("sidebarAboutImage");
+    var sidebarText = Model.Value<string>("sidebarAboutText");
+
+    // HELP FORM
+    var helpTitle = Model.Value<string>("helpTitle");
+    var helpDescription = Model.Value<string>("helpDescription");
+    var helpPlaceholder = Model.Value<string>("helpPlaceholder");
+    var helpButtonText = Model.Value<string>("helpButtonText");
+
+    // FULL-WIDTH ABOUT HEADER BLOCK
+    var headerBlock = Model.Value<BlockListModel>("headerBlock");
+
+    // FALLBACKS
+    var defaultSidebarImage = Url.Content("~/img/services/Imgformulahelp.png");
+    var defaultHeaderImage = Url.Content("~/img/services/Imgriskkey.png");
+}
+
+@if (headerBlock != null && headerBlock.Any())
+{
+    <section class="about-header-wrapper">
+        @Html.GetBlockListHtml(headerBlock)
+    </section>
+}
+
+<main class="service-detail-page container">
+    <div class="service-detail-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="service-detail-sidebar">
+            <div class="sidebar-about">
+                @if (!string.IsNullOrEmpty(sidebarTitle))
+                {
+                    <h4>@sidebarTitle</h4>
+                }
+
+                <img src="@(sidebarImage != null ? sidebarImage.Url() : defaultSidebarImage)"
+                     alt="@sidebarTitle" class="sidebar-image" />
+
+                @if (!string.IsNullOrEmpty(sidebarText))
+                {
+                    <div class="sidebar-text">
+                        @Html.Raw(sidebarText)
+                    </div>
+                }
+            </div>
+
+            <div class="sidebar-help-box">
+                @if (!string.IsNullOrEmpty(helpTitle))
+                {
+                    <h5>@helpTitle</h5>
+                }
+
+                @if (!string.IsNullOrEmpty(helpDescription))
+                {
+                    <p>@Html.Raw(helpDescription)</p>
+                }
+
+                <form class="help-form">
+                    <input type="email" placeholder="@helpPlaceholder" />
+                    <i class="fa-solid fa-envelope"></i>
+                </form>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <section class="service-detail-content">
+
+            <!-- Image under the full-width header -->
+            <div class="service-detail-header-image">
+                <img src="@(headerImage != null ? headerImage.Url() : defaultHeaderImage)" alt="@headerTitle" />
+            </div>
+
+            @if (!string.IsNullOrEmpty(headerTitle))
+            {
+                <h3 class="service-detail-title">@headerTitle</h3>
+            }
+
+            @* Description Part 1 *@
+            @if (!string.IsNullOrEmpty(headerDescription))
+            {
+                <div class="service-detail-description">
+                    @Html.Raw(headerDescription)
+                </div>
+            }
+
+            @* NEW: “A financial plan…” title between the two parts *@
+            @if (!string.IsNullOrEmpty(headerTitleTwo))
+            {
+                <h3 class="service-detail-title two">@headerTitleTwo</h3>
+            }
+
+            @* Description Part 2 *@
+            @if (!string.IsNullOrEmpty(headerDescriptionTwo))
+            {
+                <div class="service-detail-description-two">
+                    @Html.Raw(headerDescriptionTwo)
+                </div>
+            }
+
+            @* Remaining blocks *@
+            @if (contentBlocks != null && contentBlocks.Any())
+            {
+                foreach (var block in contentBlocks)
+                {
+                    var alias = block.Content.ContentType.Alias;
+                    var partialPath = $"~/Views/Partials/blocklist/Components/{alias}.cshtml";
+                    var fullPath = System.IO.Path.Combine(
+                    System.IO.Directory.GetCurrentDirectory(),
+                    "Views", "Partials", "blocklist", "Components",
+                    $"{alias}.cshtml"
+                    );
+
+                    if (System.IO.File.Exists(fullPath))
+                    {
+                        @await Html.PartialAsync(partialPath, block)
+                    }
+                    else
+                    {
+                        <p class="text-danger">⚠️ Missing partial for block type: @alias</p>
+                    }
+                }
+            }
+
+        </section>
+    </div>
+</main>
+
+@if (Model.Value<BlockListModel>("contactFormBlock") is BlockListModel formBlocks && formBlocks.Any())
+{
+    @Html.GetBlockListHtml(formBlocks)
+}

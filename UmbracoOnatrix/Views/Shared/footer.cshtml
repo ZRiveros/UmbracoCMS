@@ -1,0 +1,52 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using Umbraco.Cms.Core.Models
+
+@{
+    var footer = Umbraco.ContentAtRoot()
+        .FirstOrDefault(x => x.ContentType.Alias == "globalFooterBlock");
+    if (footer is null) { return; }
+
+    var title = footer.Value<string>("title");
+    var address = footer.Value<string>("officeAddress");
+    var phone = footer.Value<string>("phoneNumber");
+    var email = footer.Value<string>("email");
+    var imageMedia = footer.Value<IPublishedContent>("image");
+    var imageUrl = imageMedia?.Url() ?? "/img/footer/Imgfooter.png";
+}
+
+<section class="footer-section">
+    <div class="footer-inner">
+        <div class="footer-image">
+            <img src="/img/footer/Componentfooter.png" alt="Background shape" class="footer-bg-shape" />
+            <img src="@imageUrl" alt="Footer person" class="footer-person" />
+        </div>
+
+        <div class="footer-content">
+            <h2>@title</h2>
+
+            <ul>
+                <li>
+                    <i class="fa-solid fa-location-dot"></i>
+                    <div>
+                        <span class="footer-label">Office location</span>
+                        <p>@address</p>
+                    </div>
+                </li>
+                <li>
+                    <i class="fa-solid fa-phone"></i>
+                    <div>
+                        <span class="footer-label">Phone number</span>
+                        <p>@phone</p>
+                    </div>
+                </li>
+                <li>
+                    <i class="fa-solid fa-envelope"></i>
+                    <div>
+                        <span class="footer-label">E-mail address</span>
+                        <p>@email</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>

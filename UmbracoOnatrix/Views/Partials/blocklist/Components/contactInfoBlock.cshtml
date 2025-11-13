@@ -1,0 +1,64 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Umbraco.Cms.Core.Models;
+@using Umbraco.Extensions;
+
+@{
+    var content = (ContentModels.ContactInfoBlock)Model.Content;
+
+
+    var mapImage = content.MapImage is IEnumerable<MediaWithCrops> images && images.Any()
+        ? images.First().Url()
+        : "/img/misc/Imgmap.png";
+
+
+    var formTitle = content.Value<string>("formTitle");
+    var subTitle = content.Value<string>("subTitle");
+    var formDescription = content.Value<string>("formDescription");
+    var inputName = content.Value<string>("inputName");
+    var inputPhone = content.Value<string>("inputPhone");
+    var inputEmail = content.Value<string>("inputEmail");
+    var inputService = content.Value<string>("inputService");
+    var submitText = content.Value<string>("submitText");
+}
+
+<section class="contact-form-map">
+    <!-- Karta -->
+    <div class="contact-map">
+        <img src="@mapImage" alt="Map location" />
+    </div>
+
+    <!-- Formulär -->
+    <div class="contact-form-card">
+        <p class="form-eyebrow">@formTitle</p>
+        <h2>@subTitle</h2>
+        <p class="form-desc">@formDescription</p>
+
+        <form>
+            <div class="row">
+                <input type="text" placeholder="@inputName" />
+                <input type="tel" placeholder="@inputPhone" />
+            </div>
+            <div class="row">
+                <input type="email" placeholder="@inputEmail" />
+                <select>
+                    <option>@inputService</option>
+                    <option>Investment</option>
+                    <option>Insurance</option>
+                </select>
+            </div>
+            <button type="submit" class="btn-submit">@submitText</button>
+        </form>
+    </div>
+</section>
+<section class="partners-section">
+    <div class="partners-logos">
+        <img src="~/img/Icon/logo1.png" alt="Partner 1">
+        <img src="~/img/Icon/logo2.png" alt="Partner 2">
+        <img src="~/img/Icon/logo3.png" alt="Partner 3">
+        <img src="~/img/Icon/logo4.png" alt="Partner 4">
+        <img src="~/img/Icon/logo5.png" alt="Partner 5">
+        <img src="~/img/Icon/logo6.png" alt="Partner 6">
+
+    </div>
+</section>

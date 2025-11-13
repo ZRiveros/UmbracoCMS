@@ -1,0 +1,36 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.HomePage>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- === HERO & CONTENT BLOCKS === -->
+@if (Model.HasValue("heroBlock"))
+{
+    @Html.GetBlockListHtml(Model.HeroBlock)
+}
+
+<!-- === EXPERIENCE + CALL TO ACTION COMBINED BLOCK === -->
+@if (Model.HasValue("experienceWithFormBlock"))
+{
+    @await Html.GetBlockListHtmlAsync(Model, "experienceWithFormBlock")
+}
+
+<!-- === SERVICES SECTION === -->
+@if (Model.HasValue("servicesBlocks"))
+{
+    @await Html.GetBlockListHtmlAsync(Model, "servicesBlocks")
+}
+
+<!-- === TRUSTED CLIENTS SECTION === -->
+@if (Model.HasValue("trustedClientsBlock"))
+{
+    @await Html.GetBlockListHtmlAsync(Model, "trustedClientsBlock")
+}
+
+<!-- === SUCCESS STORY SECTION === -->
+@if (Model.HasValue("successStoryBlock"))
+{
+    @await Html.GetBlockListHtmlAsync(Model, "successStoryBlock")
+}

@@ -1,0 +1,45 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Umbraco.Cms.Core.Models.Blocks;
+
+@{
+    var content = (ContentModels.SuccessStoryBlock)Model.Content;
+}
+
+<section class="success-section">
+    <div class="container">
+        <p class="success-pretitle">SUCCESS STORIES</p>
+        <h2 class="success-title">Success story</h2>
+
+        <div class="success-stats">
+            <div class="stat-item">
+                <h3>689</h3>
+                <p>More than 100 customers has been served</p>
+            </div>
+            <div class="stat-item">
+                <h3>370</h3>
+                <p>More than 370 projects has been completed</p>
+            </div>
+            <div class="stat-item">
+                <h3>125</h3>
+                <p>More than 125 branches has been established in Europe and America</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="success-image">
+        <img src="~/img/misc/Succesvideo.png" alt="Success Team">
+    </div>
+</section>
+
+<section class="partners-section">
+    <div class="partners-logos">
+        <img src="~/img/Icon/logo1.png" alt="Partner 1">
+        <img src="~/img/Icon/logo2.png" alt="Partner 2">
+        <img src="~/img/Icon/logo3.png" alt="Partner 3">
+        <img src="~/img/Icon/logo4.png" alt="Partner 4">
+        <img src="~/img/Icon/logo5.png" alt="Partner 5">
+        <img src="~/img/Icon/logo6.png" alt="Partner 6">
+
+    </div>
+</section>

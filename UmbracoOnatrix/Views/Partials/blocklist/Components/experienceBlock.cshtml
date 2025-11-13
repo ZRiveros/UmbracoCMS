@@ -1,0 +1,45 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+
+@{
+    var content = (ContentModels.ExperienceBlock)Model.Content;
+
+    var hasTitle = !string.IsNullOrWhiteSpace(content.SectionTitle);
+    var hasHeading = !string.IsNullOrWhiteSpace(content.MainHeading);
+    var hasDesc = !string.IsNullOrWhiteSpace(content.Description?.ToString());
+    var hasQuote = !string.IsNullOrWhiteSpace(content.Quote?.ToString());
+    var hasName = !string.IsNullOrWhiteSpace(content.NameTitle);
+
+    // 🔥 Ange fast sökväg till bilden
+    var sigUrl = Url.Content("~/img/Icon/imgsignature.png");
+}
+
+<div class="exp-content">
+    @if (hasTitle)
+    {
+        <span class="note">@content.SectionTitle</span>
+    }
+
+    @if (hasHeading)
+    {
+        <h2 class="experience_heading">@content.MainHeading</h2>
+    }
+
+    @if (hasQuote)
+    {
+        <blockquote class="experience_quote">@Html.Raw(content.Quote)</blockquote>
+    }
+
+    @if (hasDesc)
+    {
+        <p class="experience_desc">@Html.Raw(content.Description)</p>
+    }
+
+    @if (hasName)
+    {
+        <div class="experience_signature">
+            <img class="experience_signature-img" src="~/img/icon/ImgSignature.png" alt="Signature" />
+            <div class="experience_signature-name">@content.NameTitle</div>
+        </div>
+    }
+</div>

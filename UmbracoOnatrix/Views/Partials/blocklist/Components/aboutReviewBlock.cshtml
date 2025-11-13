@@ -1,0 +1,32 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+    var content = (ContentModels.AboutReviewBlock)Model.Content;
+    var imageMedia = content.Image;
+    var image = imageMedia != null ? imageMedia.Url() : "/img/team/Imgkevin.png";
+}
+<section class="about-review">
+    <div class="container about-review__inner">
+        <div class="about-review__text">
+            <h2 class="about-review__title">@content.Title</h2>
+            @if (!string.IsNullOrWhiteSpace(content.Subtitle))
+            {
+                <p class="about-review__subtitle">@content.Subtitle</p>
+            }
+            <p class="about-review__quote"><em>@content.Quote</em></p>
+            <div class="about-review__author">
+                <div class="about-review__stars">
+                    @for (var i = 0; i < 5; i++)
+                    {
+                        <i class="fa-solid fa-star"></i>
+                    }
+                </div>
+                <p>@content.Author</p>
+                <p>@content.Company</p>
+            </div>
+        </div>
+        <div class="about-review__image">
+            <img src="@image" alt="@content.Author" />
+        </div>
+    </div>
+</section>

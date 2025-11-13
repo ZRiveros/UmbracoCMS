@@ -1,0 +1,36 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>
+@using Umbraco.Cms.Core.Models.Blocks
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+
+@{
+    var content = (ContentModels.ExperienceWithFormBlock)Model.Content;
+
+
+    var experienceBlocks = content.Value<BlockListModel>("experienceBlock");
+    var callToActionFormBlocks = content.Value<BlockListModel>("callToActionFormBlock");
+}
+
+@if ((experienceBlocks != null && experienceBlocks.Any()) || (callToActionFormBlocks != null && callToActionFormBlocks.Any()))
+{
+    <section class="experience-form-section">
+        <div class="container experience-form-wrapper">
+
+            <!-- Vänster: Experience -->
+            <div class="experience-left">
+                @if (experienceBlocks != null && experienceBlocks.Any())
+                {
+                    @Html.GetBlockListHtml(experienceBlocks)
+                }
+            </div>
+
+            <!-- Höger: Call To Action Form -->
+            <div class="experience-right">
+                @if (callToActionFormBlocks != null && callToActionFormBlocks.Any())
+                {
+                    @Html.GetBlockListHtml(callToActionFormBlocks)
+                }
+            </div>
+
+        </div>
+    </section>
+}

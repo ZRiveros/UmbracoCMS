@@ -1,0 +1,32 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.ServicesPage>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Umbraco.Cms.Core.Models.Blocks;
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main class="main-content">
+    @* --- About Header Block --- *@
+    @if (Model.HasValue("aboutHeaderBlock"))
+    {
+        var aboutHeaderBlocks = Model.Value<BlockListModel>("aboutHeaderBlock");
+        @await Html.GetBlockListHtmlAsync(aboutHeaderBlocks)
+    }
+
+    @* --- Services Block --- *@
+    @if (Model.HasValue("servicesBlock"))
+    {
+        var serviceBlocks = Model.Value<BlockListModel>("servicesBlock");
+        @await Html.GetBlockListHtmlAsync(serviceBlocks)
+    }
+
+    @* --- Global Footer Block --- *@
+    @{
+        var footer = Umbraco.ContentAtRoot().FirstOrDefault(x => x.ContentType.Alias == "globalFooterBlock");
+        if (footer != null)
+        {
+            @await Html.PartialAsync("~/Views/Shared/footer.cshtml")
+        }
+    }
+</main>

@@ -1,0 +1,43 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.ContactPage>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Umbraco.Cms.Core.Models.Blocks;
+@using Umbraco.Extensions;
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var headerBlock = Model.Value<BlockListModel>("aboutheaderBlock");
+    var contactInfoBlock = Model.Value<BlockListModel>("contactInfoBlock");
+}
+
+<main class="contact-page">
+
+    <!-- ===========================
+         HEADER BLOCK (Titel + breadcrumb)
+    ============================ -->
+    @if (headerBlock != null && headerBlock.Any())
+    {
+        <section class="contact-header">
+            @Html.GetBlockListHtml(headerBlock)
+        </section>
+    }
+
+    @if (Model.Value<BlockListModel>("contactPersonBlock") != null)
+    {
+        <section class="contact-person-block container">
+            @Html.GetBlockListHtml(Model.Value<BlockListModel>("contactPersonBlock"))
+        </section>
+    }
+
+    }
+    <!-- ===========================
+         KARTA + FORMULÄR
+    ============================ -->
+    @if (contactInfoBlock != null && contactInfoBlock.Any())
+    {
+        <section class="contact-form-map">
+            @Html.GetBlockListHtml(contactInfoBlock)
+        </section>
+    }
+
+</main>

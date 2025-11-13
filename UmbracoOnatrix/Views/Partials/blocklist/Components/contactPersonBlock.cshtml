@@ -1,0 +1,51 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Umbraco.Cms.Core.Models;
+@{
+    var content = (ContentModels.ContactPersonBlock)Model.Content;
+
+    var imageMedia = content.Image;
+    var image = imageMedia != null ? imageMedia.Url() : "/img/footer/Imgfooter.png";
+
+    var title = content.Title ?? "Let us know about your next project";
+    var address = content.Address ?? "Klarabergsviadukten 90, 111 52 Stockholm";
+    var phone = content.Phone ?? "+46 8 123 456 75";
+    var email = content.Email ?? "sales@onatrix.com";
+}
+
+<section class="contact-person">
+    <div class="contact-person-wrapper">
+        <div class="contact-person-image">
+            <img src="~/img/footer/Imgfooter.png" alt="Contact person" class="person-photo" />
+            <img src="/img/footer/Componentfooter.png" alt="Background shape" class="contact-bg-shape" />
+        </div>
+
+        <div class="contact-person-info">
+            <h2>Let us know about your next project</h2>
+
+            <div class="contact-detail">
+                <i class="fa-solid fa-location-dot"></i>
+                <div>
+                    <span class="contact-label">Office location</span>
+                    <p>Klarabergsviadukten 90, 111 52 Stockholm</p>
+                </div>
+            </div>
+
+            <div class="contact-detail">
+                <i class="fa-solid fa-phone"></i>
+                <div>
+                    <span class="contact-label">Phone number</span>
+                    <p>+46 8 123 456 75</p>
+                </div>
+            </div>
+
+            <div class="contact-detail">
+                <i class="fa-solid fa-envelope"></i>
+                <div>
+                    <span class="contact-label">E-mail address</span>
+                    <p>sales@onatrix.com</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
